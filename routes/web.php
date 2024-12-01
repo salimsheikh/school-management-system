@@ -2,15 +2,15 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AcademicYearController;
 use Illuminate\Support\Facades\Auth;
 
 // Redirect `/admin` to the appropriate page
 Route::get('/admin', function () {
-    dd(Auth::check());
     if (Auth::check()) {
-        return redirect('/admin/dashboard');
+        return redirect().route('admin.dashboard');
     }
-    return redirect('/login');
+    return redirect()->route('admin.login');
 });
 
 Route::group(['prefix' => 'admin'], function(){
@@ -25,18 +25,22 @@ Route::group(['prefix' => 'admin'], function(){
         Route::get('dashboard',[AdminController::class, 'dashboard'])->name('admin.dashboard');
         Route::get('form',[AdminController::class, 'form'])->name('admin.form');
         Route::get('table',[AdminController::class, 'table'])->name('admin.table');
+
+        //Route::get('academic-year/index',[AcademicYearController::class, 'index'])->name('admin.academic_year.index');
+        //Route::get('academic-year/create',[AcademicYearController::class, 'index'])->name('admin.academic_year.create');
+        //Route::post('academic-year/store',[AcademicYearController::class, 'store'])->name('admin.academic_year.store');
+
+        Route::resource('academic-year', AcademicYearController::class);
     });
 });
 
 // Handle `/` redirection
-Route::get('/', function () {
-    dd(Auth::check());
+Route::get('/', function () {    
     if (Auth::check()) {
-        return redirect('/admin/dashboard');
+        return redirect()->route('admin.dashboard');
     }
-    return redirect('/login');
+    return redirect()->route('admin.login');
 });
-
 
 
 

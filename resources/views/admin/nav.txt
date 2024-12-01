@@ -1,0 +1,35 @@
+<li class="nav-item">
+                            <a href="{{ route('admin.academic-year.index') }}" class="nav-link {{ Request::routeIs('admin.academic-year*') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-chart-pie"></i>
+                                <p>
+                                    {{ __('Academic Year') }}
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.academic-year.index') }}" class="nav-link {{ Request::routeIs('admin.academic-year*') ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>{{ __('Add') }}</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.academic-year.index') }}" class="nav-link {{ Request::routeIs('admin.academic-year*') ? 'active' : '' }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>{{ __('View') }}</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="pages/charts/inline.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Inline</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="pages/charts/uplot.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>uPlot</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
