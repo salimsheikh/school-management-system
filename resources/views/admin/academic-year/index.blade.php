@@ -10,7 +10,8 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('Dashboard') }}</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('Dashboard') }}</a>
+                            </li>
                             <li class="breadcrumb-item active">{{ __('Add Academic Year') }}</li>
                         </ol>
                     </div>
@@ -21,7 +22,7 @@
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-12"> 
+                    <div class="col-12">
 
                         @if (Session::has('success'))
                             <div class="alert alert-success">{{ Session::get('success') }}</div>
@@ -29,13 +30,14 @@
 
                         @if (Session::has('error'))
                             <div class="alert alert-success">{{ Session::get('error') }}</div>
-                        @endif                        
+                        @endif
 
                         <div class="card">
                             <div class="card-header">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <h3 class="card-title">{{ __('Academic Years') }}</h3>
-                                    <a href="{{ route('academic-year.create') }}" class="btn btn-primary float-right">{{ __('Add Academic Year') }}</a>
+                                    <a href="{{ route('academic-year.create') }}"
+                                        class="btn btn-primary float-right">{{ __('Add Academic Year') }}</a>
                                 </div>
                             </div>
 
@@ -56,19 +58,22 @@
                                                 <td>{{ $item->id }}</td>
                                                 <td>{{ $item->name }}</td>
                                                 <td>{{ $item->created_at }}</td>
-                                                <td><a href="{{ route('academic-year.edit', $item->id) }}" class="btn btn-primary">{{ __('Edit') }}</a></td>
+                                                <td><a href="{{ route('academic-year.edit', $item->id) }}"
+                                                        class="btn btn-primary">{{ __('Edit') }}</a></td>
                                                 <td>
-                                                    <form action="{{ route('academic-year.destroy',  $item->id) }}" method="POST">
+                                                    <form action="{{ route('academic-year.destroy', $item->id) }}"
+                                                        method="POST">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Do you want to delete?')">{{ __('Delete') }}</button>
+                                                        <button type="submit" class="btn btn-danger"
+                                                            onclick="return confirm('Do you want to delete?')">{{ __('Delete') }}</button>
                                                     </form>
                                                 </td>
                                             </tr>
                                         @endforeach
-                                                                               
+
                                     </tbody>
-                                    
+
                                 </table>
                             </div>
 
@@ -110,8 +115,50 @@
                 "responsive": true,
                 "lengthChange": false,
                 "autoWidth": false,
-                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-            }).buttons().container().appendTo('#items-table_wrapper .col-md-6:eq(0)');            
+                dom: 'Bfrtip', // Add export buttons
+                buttons: [
+                    {
+                        extend: 'copy',
+                        text: 'Copy',
+                        exportOptions: {
+                            columns: ':not(:nth-last-child(-n+2))' // Exclude last two columns
+                        }
+                    },
+                    {
+                        extend: 'csv',
+                        text: 'CSV',
+                        exportOptions: {
+                            columns: ':not(:nth-last-child(-n+2))' // Exclude last two columns
+                        }
+                    },
+                    {
+                        extend: 'excel',
+                        text: 'Excel',
+                        exportOptions: {
+                            columns: ':not(:nth-last-child(-n+2))' // Exclude last two columns
+                        }
+                    },
+                    {
+                        extend: 'pdf',
+                        text: 'PDF',
+                        exportOptions: {
+                            columns: ':not(:nth-last-child(-n+2))' // Exclude last two columns
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        text: 'Print',
+                        exportOptions: {
+                            columns: ':not(:nth-last-child(-n+2))' // Exclude last two columns
+                        }
+                    },
+                    {
+                        extend: 'colvis',
+                        text: 'Column Visibility'
+                    }
+
+                ]
+            }).buttons().container().appendTo('#items-table_wrapper .col-md-6:eq(0)');
         });
     </script>
 @endsection
