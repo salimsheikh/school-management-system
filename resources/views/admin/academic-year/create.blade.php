@@ -43,7 +43,7 @@
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="name">{{ __('Academic Year') }}</label>
-                                        <input type="text" class="form-control" id="name" name="name"
+                                        <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}"
                                             placeholder="{{ __('Enter Academic Year') }}">
 
                                             @error('name')

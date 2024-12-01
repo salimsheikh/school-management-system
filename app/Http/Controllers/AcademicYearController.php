@@ -56,7 +56,7 @@ class AcademicYearController extends Controller
      */
     public function show(AcademicYear $academicYear)
     {
-        // $academicYear::create($academicYear);
+       
     }
 
     /**
@@ -75,12 +75,13 @@ class AcademicYearController extends Controller
     {
        
         $validatedData = $request->validate([
-            'name' => 'required|string|unique:academic_years,name,'.$academicYear->id,
+            'name' => 'required|string|unique:academic_years,name,'.$request->id,
         ]);
         
         try {
 
-            $academicYear->update($validatedData);
+            $item = AcademicYear::find($request->id);
+            $item->update($validatedData);
         
             // Return success response (optional)
             return redirect()->route('academic-year.index')->with('success', __('Academic Year updated successfully!'));

@@ -12,7 +12,8 @@ class ClassesController extends Controller
      */
     public function index()
     {
-        //
+        $items = Classes::latest()->get();
+        return view('admin.class.index', compact('items'));
     }
 
     /**
@@ -20,7 +21,7 @@ class ClassesController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.class.create');
     }
 
     /**
@@ -28,7 +29,25 @@ class ClassesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|string|unique:classes,name',
+        ]);
+        
+        try {
+
+            // Create the new classes
+            Classes::create($validatedData);
+        
+            // Return success response (optional)
+            return redirect()->route('classes.index')->with('success', __('Classes created successfully!'));
+
+        } catch (ValidationException $e) {
+            // Handle validation error
+            return back()->withErrors($e->errors())->withInput();
+        } catch (\Exception $e) {
+            // Handle other exceptions
+            return back()->with('error', __('Something went wrong. Please try again.'));
+        }
     }
 
     /**
@@ -36,15 +55,16 @@ class ClassesController extends Controller
      */
     public function show(Classes $classes)
     {
-        //
+       
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Classes $classes)
+    public function edit($id)
     {
-        //
+        $item = Classes::find($id);
+        return view('admin.class.edit',compact('item'));
     }
 
     /**
@@ -52,7 +72,25 @@ class ClassesController extends Controller
      */
     public function update(Request $request, Classes $classes)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|string|unique:classes,name,'.$request->id,
+        ]);
+        
+        try {
+
+            $item = Classes::find($request->id);
+            $item->update($validatedData);
+        
+            // Return success response (optional)
+            return redirect()->route('classes.index')->with('success', __('Classes updated successfully!'));
+
+        } catch (ValidationException $e) {
+            // Handle validation error
+            return back()->withErrors($e->errors())->withInput();
+        } catch (\Exception $e) {
+            // Handle other exceptions
+            return back()->with('error', __('Something went wrong. Please try again.'));
+        }
     }
 
     /**
@@ -60,6 +98,7 @@ class ClassesController extends Controller
      */
     public function destroy(Classes $classes)
     {
-        //
+        $classes->delete($classes);
+        return redirect()->route('classes.index')->with(['success'=> __('Classes deleted successfully.')]);
     }
 }

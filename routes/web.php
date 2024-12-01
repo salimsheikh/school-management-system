@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AcademicYearController;
+use App\Http\Controllers\ClassesController;
 use Illuminate\Support\Facades\Auth;
 
 // Redirect `/admin` to the appropriate page
@@ -26,11 +27,8 @@ Route::group(['prefix' => 'admin'], function(){
         Route::get('form',[AdminController::class, 'form'])->name('admin.form');
         Route::get('table',[AdminController::class, 'table'])->name('admin.table');
 
-        //Route::get('academic-year/index',[AcademicYearController::class, 'index'])->name('admin.academic_year.index');
-        //Route::get('academic-year/create',[AcademicYearController::class, 'index'])->name('admin.academic_year.create');
-        //Route::post('academic-year/store',[AcademicYearController::class, 'store'])->name('admin.academic_year.store');
-
         Route::resource('academic-year', AcademicYearController::class);
+        Route::resource('classes', ClassesController::class);        
     });
 });
 
