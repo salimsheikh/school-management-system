@@ -220,8 +220,15 @@
 
                         <li class="nav-item ">
                             <a href="{{ route('classes.index') }}" class="nav-link {{ request()->is('*/classes*') ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-calendar-alt"></i>
+                                <i class="nav-icon fas fa-graduation-cap"></i>
                                 <p>{{ __('Class') }}</p>
+                            </a>                            
+                        </li>
+
+                        <li class="nav-item ">
+                            <a href="{{ route('fee-head.index') }}" class="nav-link {{ request()->is('*/fee-head*') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-credit-card"></i>
+                                <p>{{ __('Fee Head') }}</p>
                             </a>                            
                         </li>
                         

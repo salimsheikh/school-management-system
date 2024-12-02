@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AcademicYearController;
 use App\Http\Controllers\ClassesController;
+use App\Http\Controllers\FeeHeadController;
 use Illuminate\Support\Facades\Auth;
 
 // Redirect `/admin` to the appropriate page
@@ -29,6 +30,7 @@ Route::group(['prefix' => 'admin'], function(){
 
         Route::resource('academic-year', AcademicYearController::class);
         Route::resource('classes', ClassesController::class);        
+        Route::resource('fee-head', FeeHeadController::class);
     });
 });
 

@@ -6,12 +6,13 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>{{ __('Classs') }}</h1>
+                        <h1>{{ __('Fee Heads') }}</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('Dashboard') }}</a></li>
-                            <li class="breadcrumb-item active">{{ __('Add Class') }}</li>
+                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('Dashboard') }}</a>
+                            </li>
+                            <li class="breadcrumb-item active">{{ __('Add Fee Head') }}</li>
                         </ol>
                     </div>
                 </div>
@@ -21,7 +22,7 @@
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-12"> 
+                    <div class="col-12">
 
                         @if (Session::has('success'))
                             <div class="alert alert-success">{{ Session::get('success') }}</div>
@@ -29,13 +30,14 @@
 
                         @if (Session::has('error'))
                             <div class="alert alert-success">{{ Session::get('error') }}</div>
-                        @endif                        
+                        @endif
 
                         <div class="card">
                             <div class="card-header">
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <h3 class="card-title">{{ __('Classs') }}</h3>
-                                    <a href="{{ route('classes.create') }}" class="btn btn-primary float-right">{{ __('Add Class') }}</a>
+                                    <h3 class="card-title">{{ __('Fee Heads') }}</h3>
+                                    <a href="{{ route('fee-head.create') }}"
+                                        class="btn btn-primary float-right">{{ __('Add Fee Head') }}</a>
                                 </div>
                             </div>
 
@@ -56,19 +58,22 @@
                                                 <td>{{ $item->id }}</td>
                                                 <td>{{ $item->name }}</td>
                                                 <td>{{ $item->created_at }}</td>
-                                                <td><a href="{{ route('classes.edit', $item->id) }}" class="btn btn-primary">{{ __('Edit') }}</a></td>
+                                                <td><a href="{{ route('fee-head.edit', $item->id) }}"
+                                                        class="btn btn-primary">{{ __('Edit') }}</a></td>
                                                 <td>
-                                                    <form action="{{ route('classes.destroy',  $item->id) }}" method="POST">
+                                                    <form action="{{ route('fee-head.destroy', $item->id) }}"
+                                                        method="POST">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Do you want to delete?')">{{ __('Delete') }}</button>
+                                                        <button type="submit" class="btn btn-danger"
+                                                            onclick="return confirm('Do you want to delete?')">{{ __('Delete') }}</button>
                                                     </form>
                                                 </td>
                                             </tr>
                                         @endforeach
-                                                                               
+
                                     </tbody>
-                                    
+
                                 </table>
                             </div>
 
@@ -153,7 +158,7 @@
                     }
 
                 ]
-            }).buttons().container().appendTo('#items-table_wrapper .col-md-6:eq(0)');            
+            }).buttons().container().appendTo('#items-table_wrapper .col-md-6:eq(0)');
         });
     </script>
 @endsection

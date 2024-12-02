@@ -6,13 +6,13 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>{{ __('Academic Year') }}</h1>
+                        <h1>{{ __('Fee Head') }}</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">{{ __('Dashboard') }}</a></li>
-                            <li class="breadcrumb-item"><a href="{{ route('academic-year.index') }}">{{ __('Academic Year') }}</a></li>
-                            <li class="breadcrumb-item active">{{ __('Edit Academic Year') }}</li>
+                            <li class="breadcrumb-item"><a href="{{ route('fee-head.index') }}">{{ __('Fee Head') }}</a></li>
+                            <li class="breadcrumb-item active">{{ __('Add Fee Head') }}</li>
                         </ol>
                     </div>
                 </div>
@@ -34,18 +34,17 @@
 
                         <div class="card card-primary">
                             <div class="card-header">
-                                <h3 class="card-title">{{ __('Edit Academic Year') }}</h3>
-                            </div>                            
+                                <h3 class="card-title">{{ __('Add Fee Head') }}</h3>
+                            </div>
 
-                            <form method="POST" action="{{ route('academic-year.update',$item->id) }}" method="post">
+
+                            <form method="POST" action="{{ route('fee-head.store') }}">
                                 @csrf
-                                @method('PUT')
-                                <input type="hidden" name="id" value="{{ $item->id }}" />
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label for="name">{{ __('Academic Year') }}</label>
-                                        <input type="text" class="form-control" id="name" name="name"
-                                            placeholder="{{ __('Enter Academic Year') }}" value="{{ old('name', $item->name) }}">
+                                        <label for="name">{{ __('Fee Head') }}</label>
+                                        <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}"
+                                            placeholder="{{ __('Enter Fee Head') }}">
 
                                             @error('name')
                                                 <div class="alert alert-danger mt-2">{{ $message }}</div>                                                
@@ -54,8 +53,8 @@
                                 </div>
 
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary">{{ __('Update Academic Year') }}</button>
-                                    <a href="{{ route('academic-year.index') }}" class="btn btn-default float-right"">{{ __('Back') }}</a>                                    
+                                    <button type="submit" class="btn btn-primary">{{ __('Add Fee Head') }}</button>
+                                    <a href="{{ route('fee-head.index') }}" class="btn btn-default float-right"">{{ __('Back') }}</a>                                    
                                 </div>
                             </form>
                         </div>
