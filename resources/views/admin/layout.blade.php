@@ -231,6 +231,13 @@
                                 <p>{{ __('Fee Head') }}</p>
                             </a>                            
                         </li>
+
+                        <li class="nav-item ">
+                            <a href="{{ route('fee-structure.index') }}" class="nav-link {{ request()->is('*/fee-structure*') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-credit-card"></i>
+                                <p>{{ __('Fee Structure') }}</p>
+                            </a>                            
+                        </li>
                         
                         
                         
@@ -281,5 +288,28 @@
     <script src="dist/js/demo.js"></script>
     <script src="dist/js/pages/dashboard.js"></script>
     @yield('footer')
+
+    <style>
+        .grid-three-column {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+
+        }
+        
+
+        
+
+        @media screen and (min-width: 767px){
+            #items-table_filter, .dataTables_paginate {
+                float: right;
+            }
+            #items-table{
+                clear: both;
+                margin-bottom: 10px;
+            }
+            .dataTables_info{float: left;}
+        }
+    </style>
 </body>
 </html>

@@ -115,6 +115,7 @@
                 "responsive": true,
                 "lengthChange": false,
                 "autoWidth": false,
+                "stateSave": true,
                 dom: 'Bfrtip', // Add export buttons
                 buttons: [
                     {
