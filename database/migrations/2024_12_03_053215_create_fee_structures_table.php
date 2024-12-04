@@ -28,7 +28,12 @@ return new class extends Migration
             $table->string('month10')->nullable();
             $table->string('month11')->nullable();
             $table->string('month12')->nullable();
+            //$table->string('start_month')->nullable();
             $table->timestamps();
+
+            // Add unique constraint on class_id, academic_year_id, and fee_head_id
+            //$table->unique(['class_id', 'academic_year_id', 'fee_head_id'], 'unique_fee_structure');
+
         });
     }
 

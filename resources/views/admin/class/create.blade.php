@@ -52,9 +52,9 @@
                                     </div>
                                 </div>
 
-                                <div class="card-footer">
+                                <div class="card-footer mt-3">
                                     <button type="submit" class="btn btn-primary">{{ __('Add Class') }}</button>
-                                    <a href="{{ route('classes.index') }}" class="btn btn-default float-right"">{{ __('Back') }}</a>                                    
+                                    <a href="{{ route('classes.index') }}" class="btn btn-default float-right">{{ __('Back') }}</a>                                    
                                 </div>
                             </form>
                         </div>

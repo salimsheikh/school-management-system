@@ -42,10 +42,10 @@ class AdminController extends Controller
 
     public function register(){
         $user = new User();
-        $user->name = "Safiq Shaikh";
-        $user->email = "safiq@gmail.com";
+        $user->name = "Salim Shaikh";
+        $user->email = "salimsheikh4u2000@gmail.com";
         $user->role = "student";
-        $user->password = Hash::make("safiq@gmail.com");
+        $user->password = Hash::make("1");
         $user->save();
         return redirect()->route('admin.login')->with('success','User created successfully.');
     }

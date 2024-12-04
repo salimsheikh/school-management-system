@@ -53,9 +53,9 @@
                                     </div>
                                 </div>
 
-                                <div class="card-footer">
+                                <div class="card-footer mt-3">
                                     <button type="submit" class="btn btn-primary">{{ __('Update Academic Year') }}</button>
-                                    <a href="{{ route('academic-year.index') }}" class="btn btn-default float-right"">{{ __('Back') }}</a>                                    
+                                    <a href="{{ route('academic-year.index') }}" class="btn btn-default float-right">{{ __('Back') }}</a>                                    
                                 </div>
                             </form>
                         </div>

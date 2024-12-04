@@ -61,7 +61,7 @@
                                     </div>
                                 </div>
 
-                                <div class="card-footer">
+                                <div class="card-footer mt-3">
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </div>
                             </form>

@@ -31,9 +31,7 @@
 
                         @if (Session::has('error'))
                             <div class="alert alert-danger">{{ Session::get('error') }}</div>
-                        @endif
-
-                        {{ $item->academic_year_id }}
+                        @endif                      
 
                         <div class="card card-primary">
                             <div class="card-header">
@@ -97,11 +95,11 @@
                                             </div>
                                         @endforeach
                                     </div>
-                                    <div class="card-footer">
+                                    <div class="card-footer mt-3">
                                         <button type="submit"
                                             class="btn btn-primary">{{ __('Update Fee Structure') }}</button>
                                         <a href="{{ route('fee-structure.index') }}"
-                                            class="btn btn-default float-right"">{{ __('Back') }}</a>
+                                            class="btn btn-default float-right">{{ __('Back') }}</a>
                                     </div>
                                 </form>
                             </div>

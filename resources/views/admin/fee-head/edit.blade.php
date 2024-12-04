@@ -53,9 +53,9 @@
                                     </div>
                                 </div>
 
-                                <div class="card-footer">
+                                <div class="card-footer mt-3">
                                     <button type="submit" class="btn btn-primary">{{ __('Update Fee Head') }}</button>
-                                    <a href="{{ route('fee-head.index') }}" class="btn btn-default float-right"">{{ __('Back') }}</a>                                    
+                                    <a href="{{ route('fee-head.index') }}" class="btn btn-default float-right">{{ __('Back') }}</a>                                    
                                 </div>
                             </form>
                         </div>

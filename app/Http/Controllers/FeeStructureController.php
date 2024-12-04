@@ -7,9 +7,21 @@ use App\Models\AcademicYear;
 use App\Models\Classes;
 use App\Models\FeeHead;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Exception;
+
+use App\Services\MonthService;
 
 class FeeStructureController extends Controller
 {
+    
+    protected $monthService;
+
+    public function __construct()
+    {
+        $this->monthService = new MonthService();
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -20,7 +32,7 @@ class FeeStructureController extends Controller
         $columns['class_id'] = __('Class');
         $columns['fee_head_id'] = __('Fee');
 
-        $months = $this->getMonths(true);
+        $months = $this->monthService->getMonths(true);
 
         $columns = $columns->merge($months);
        
@@ -54,7 +66,7 @@ class FeeStructureController extends Controller
     public function create()
     {
         $data = [];
-        $data['months_fields'] = $this->getMonths(false);
+        $data['months_fields'] = $this->monthService->getMonths();
         $data['academicYears'] = AcademicYear::all();
         $data['classes'] = Classes::all();
         $data['feeHeads'] = FeeHead::all();
@@ -104,7 +116,7 @@ class FeeStructureController extends Controller
     public function edit(FeeStructure $feeStructure)
     {
         $data = [];
-        $data['months_fields'] = $this->getMonths(false);
+        $data['months_fields'] = $this->monthService->getMonths();
         $data['academicYears'] = AcademicYear::all();
         $data['classes'] = Classes::all();
         $data['feeHeads'] = FeeHead::all();
@@ -144,45 +156,16 @@ class FeeStructureController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(FeeStructure $feeStructure)
+    public function destroy($id)
     {
-        $feeStructure->delete($feeStructure);
-        return redirect()->route('fee-structure.index')->with(['success'=> __('Fee Structure deleted successfully.')]);
-    }
-
-    function getMonths($short = false)
-    {
-        $startMonth = 'June'; // Fetch dynamically from the database or settings
-
-        // List of all months
-        if($short){
-            $startMonth = substr($startMonth,0,3);
-            $months = collect([
-                __('Jan'), __('Febr'), __('Mar'), __('Apr'), __('May'), __('Jun'), __('Jul'), __('Aug'), __('Sept'), __('Oct'), __('Nov'), __('Dec')
-            ]);
-        }else{
-            $months = collect([
-                __('January'), __('February'), __('March'), __('April'), __('May'), __('June'),__('July'), __('August'), __('September'), __('October'), __('November'), __('December')
-            ]);
+        try {
+            $item = FeeStructure::findOrFail($id);
+            $item->delete();
+            return redirect()->route('fee-structure.index')->with(['success'=> __('Fee Structure deleted successfully.')]);
+        } catch (ModelNotFoundException $e) {
+            return redirect()->route('fee-structure.index')->with('error', __('Record not found.'));
+        } catch (Exception $e) {            
+            return redirect()->route('fee-structure.index')->with('error', __('An error occurred while deleting the record.'));
         }
-        
-
-        // Find the starting index for the given start month
-        $startIndex = $months->search($startMonth);
-
-        // Rotate the months array to start from the configured month
-        $orderedMonths = $months->slice($startIndex)->merge($months->take($startIndex));
-
-        // Generate the months_fields array dynamically
-        $months_fields = $orderedMonths->mapWithKeys(function ($month, $index) {
-            $key = 'month' . str_pad($index + 1, 2, '0', STR_PAD_LEFT);
-            return [$key => __($month)];
-        });
-
-        // Convert to an array if needed
-        $months_fields = $months_fields->toArray();
-
-        
-        return $months_fields;
-    }
+    }    
 }

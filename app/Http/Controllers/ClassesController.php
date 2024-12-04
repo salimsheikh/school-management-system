@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Classes;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Exception;
 
 class ClassesController extends Controller
 {
@@ -96,9 +98,16 @@ class ClassesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Classes $classes)
+    public function destroy($id)
     {
-        $classes->delete($classes);
-        return redirect()->route('classes.index')->with(['success'=> __('Classes deleted successfully.')]);
+        try {
+            $item = Classes::findOrFail($id);
+            $item->delete();
+            return redirect()->route('classes.index')->with(['success'=> __('Classes deleted successfully.')]);
+        } catch (ModelNotFoundException $e) {
+            return redirect()->route('classes.index')->with('error', __('Record not found.'));
+        } catch (Exception $e) {            
+            return redirect()->route('classes.index')->with('error', __('An error occurred while deleting the record.'));
+        }
     }
 }

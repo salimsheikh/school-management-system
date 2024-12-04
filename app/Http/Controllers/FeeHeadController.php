@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\FeeHead;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Exception;
 
 class FeeHeadController extends Controller
 {
@@ -96,9 +98,16 @@ class FeeHeadController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(FeeHead $feeHead)
+    public function destroy($id)
     {
-        $feeHead->delete($feeHead);
-        return redirect()->route('fee-head.index')->with(['success'=> __('Fee Head deleted successfully.')]);
+        try {
+            $item = FeeHead::findOrFail($id);
+            $item->delete();
+            return redirect()->route('fee-head.index')->with(['success'=> __('Fee Head deleted successfully.')]);
+        } catch (ModelNotFoundException $e) {
+            return redirect()->route('fee-head.index')->with('error', __('Record not found.'));
+        } catch (Exception $e) {            
+            return redirect()->route('fee-head.index')->with('error', __('An error occurred while deleting the record.'));
+        }
     }
 }

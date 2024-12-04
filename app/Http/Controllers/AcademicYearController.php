@@ -98,9 +98,16 @@ class AcademicYearController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(AcademicYear $academicYear)
+    public function destroy($id)
     {
-        $academicYear->delete($academicYear);
-        return redirect()->route('academic-year.index')->with(['success'=> __('Academic Year deleted successfully.')]);
+        try {
+            $item = AcademicYear::findOrFail($id);
+            $item->delete();
+            return redirect()->route('academic-year.index')->with(['success'=> __('Academic Year deleted successfully.')]);
+        } catch (ModelNotFoundException $e) {
+            return redirect()->route('academic-year.index')->with('error', __('Record not found.'));
+        } catch (Exception $e) {            
+            return redirect()->route('academic-year.index')->with('error', __('An error occurred while deleting the record.'));
+        }
     }
 }
